@@ -27,14 +27,24 @@ const Home = () => {
     }
 
     const doesRepeat = (curWeek: string[][], lastWeek: string[][]): boolean => {
-        curWeek.forEach(pair => {
-            lastWeek.forEach(lastPair => {
-                if (pair[0] === lastPair[0] && pair[1] === lastPair[1]) {
-                    console.log('repeated')
-                    return true
-                }
-            })
-        })
+
+        for (let i = 0; i < curWeek.length; i++) {
+            const curPair = curWeek[i]
+            const lastPair = lastWeek[i]
+
+            if (curPair[1] === lastPair[1]) {
+                return true
+            }
+        }
+
+        // curWeek.forEach(pair => {
+        //     lastWeek.forEach(lastPair => {
+        //         if (pair[0] === lastPair[0] && pair[1] === lastPair[1]) {
+        //             console.log('repeated')
+        //             return true
+        //         }
+        //     })
+        // })
 
         return false
     }
@@ -62,6 +72,8 @@ const Home = () => {
                         weekPairings.push([name, shuffledNames[0]])
                     }
                 })
+
+                weekPairings.sort()
 
                 // check if any of the pairings repeat
                 if (i !== 1 && doesRepeat(weekPairings, pairings[pairings.length - 1])) {
