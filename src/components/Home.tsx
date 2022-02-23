@@ -1,4 +1,4 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import React from 'react'
 
 
@@ -116,7 +116,7 @@ const Home = () => {
                 value={value}
                 onChange={handleChange} 
             />
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-label"># of Weeks</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
@@ -133,7 +133,9 @@ const Home = () => {
                         }
                     </Select>
             </FormControl>
-            <Button onClick={handleClick}>Generate</Button>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', m: 1 }}>
+                <Button onClick={handleClick}>Generate</Button>
+            </Box>
             <br />
             <p>
                 Results:
