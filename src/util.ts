@@ -59,12 +59,12 @@ const generateNames = (names: string[], weeks: number, asString=true) => {
         }
         // week i compares to week i - 1 and week i - 2
         else {
-            if (!doesRepeat(weekPairings, pairings[i - 1]) && !doesRepeat(weekPairings, pairings[i - 2])) {
+            if (!doesRepeat(weekPairings, pairings[pairings.length - 1]) && !doesRepeat(weekPairings, pairings[pairings.length - 2])) {
                 pairings.push(weekPairings)
             }
             else {
                 i--
-                console.log('repeat')
+                console.log('repeat double')
             }
         }
 
