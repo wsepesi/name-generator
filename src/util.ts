@@ -54,6 +54,7 @@ const generateNames = (names: string[], weeks: number, asString=true) => {
                 pairings.push(weekPairings)
             }
             else {
+                console.log('repeat 1')
                 i--
             }
         }
