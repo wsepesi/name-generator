@@ -1,11 +1,11 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+
 import React from 'react'
-
-
+import generateNames from '../util'
 
 const Home = () => {
     const [value, setValue] = React.useState('')
-    const [weeks, setWeeks] = React.useState<string>('')
+    const [weeksVal, setWeeks] = React.useState<string>('')
     const [results, setResults] = React.useState<string>('')
 
     const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -16,85 +16,16 @@ const Home = () => {
         setWeeks(event.target.value);
     }
 
-    const shuffleArray = (array: string[]) => {
-        for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-        }
-        return array
-    }
-
-    const doesRepeat = (curWeek: string[][], lastWeek: string[][]): boolean => {
-
-        for (let i = 0; i < curWeek.length; i++) {
-            const curPair = curWeek[i]
-            const lastPair = lastWeek[i]
-
-            if (curPair[1] === lastPair[1]) {
-                return true
-            }
-        }
-
-        // curWeek.forEach(pair => {
-        //     lastWeek.forEach(lastPair => {
-        //         if (pair[0] === lastPair[0] && pair[1] === lastPair[1]) {
-        //             console.log('repeated')
-        //             return true
-        //         }
-        //     })
-        // })
-
-        return false
-    }
-
     const handleClick = () => {
         if (!value) {
             alert('Please enter names')
         }
         else {
             const names = value.split(' ')
+            const weeks = parseInt(weeksVal)
+            const res = generateNames(names, weeks)
 
-            const pairings: string[][][] = []
-            // print each week number
-            for (let i = 1; i <= parseInt(weeks); i++) {
-                // randomly shuffle the names
-                const shuffledNames = shuffleArray(names)
-
-                // add each pairing to pairings
-                const weekPairings: string[][] = []
-                shuffledNames.forEach((name, index) => {
-                    if (index !== shuffledNames.length - 1) {
-                        weekPairings.push([name, shuffledNames[index + 1]])
-                    }
-                    else {
-                        weekPairings.push([name, shuffledNames[0]])
-                    }
-                })
-
-                weekPairings.sort()
-
-                // check if any of the pairings repeat
-                if (i !== 1 && doesRepeat(weekPairings, pairings[pairings.length - 1])) {
-                    i--
-                    console.log('repeat')
-                } else {
-                    pairings.push(weekPairings)
-                }
-            }
-
-            let results = ''
-
-            pairings.forEach((pairing, index) => {
-                results += `Week ${index + 1}: \n`
-                pairing.forEach((pair) => {
-                    results += `${pair[0]}: ${pair[1]}\n`
-                })
-                results += '\n'
-            })
-
-            setResults(results)
+            setResults(res)
         }    
     }
 
@@ -121,7 +52,7 @@ const Home = () => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={weeks}
+                        value={weeksVal}
                         label="# of Weeks"
                         onChange={handleWeekChange}
                     >
