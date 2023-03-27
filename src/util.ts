@@ -68,14 +68,6 @@ const generateNames = (names: string[], weeks: number, asString=true) => {
                 console.log('repeat double')
             }
         }
-
-
-        // if (i !== 1 && doesRepeat(weekPairings, pairings[pairings.length - 1])) {
-        //     i--
-        //     console.log('repeat')
-        // } else {
-        //     pairings.push(weekPairings)
-        // }
     }
 
     let results = ''
